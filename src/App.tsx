@@ -134,20 +134,29 @@ const SpotifyWidget = () => {
 
     useEffect(() => {
         fetchNowPlaying();
-        const interval = setInterval(fetchNowPlaying, 10000);
+        const interval = setInterval(fetchNowPlaying, 3000); // Update every 3 seconds
         return () => clearInterval(interval);
     }, []);
 
-    // Update progress bar every second when playing
+    // Update progress bar every second when playing - more accurate calculation
     useEffect(() => {
         if (!isPlaying || !currentTrack?.progress_ms || !currentTrack?.duration_ms) return;
 
+        const startTime = Date.now();
+        const initialProgress = currentTrack.progress_ms;
+
         const interval = setInterval(() => {
-            setProgress(prev => {
-                const newProgress = prev + (1000 / currentTrack.duration_ms!) * 100;
-                return newProgress > 100 ? 100 : newProgress;
-            });
-        }, 1000);
+            const elapsed = Date.now() - startTime;
+            const currentProgressMs = initialProgress + elapsed;
+            const newProgress = (currentProgressMs / currentTrack.duration_ms!) * 100;
+            
+            if (newProgress >= 100) {
+                setProgress(100);
+                clearInterval(interval);
+            } else {
+                setProgress(newProgress);
+            }
+        }, 100); // Update every 100ms for smoother animation
 
         return () => clearInterval(interval);
     }, [isPlaying, currentTrack]);
@@ -200,8 +209,8 @@ const SpotifyWidget = () => {
         <div className="fixed bottom-8 left-8 z-40 p-4 bg-gray-900/90 backdrop-blur-sm border border-green-500/50 rounded-2xl max-w-xs hover:scale-105 transition-transform duration-300">
             <div className="flex items-center gap-3 mb-2">
                 <div className="relative">
-                    <img 
-                        src={currentTrack.image || '/api/placeholder/48/48'} 
+                    <img
+                        src={currentTrack.image || '/api/placeholder/48/48'}
                         alt="Album Art"
                         className="w-12 h-12 rounded-xl object-cover"
                     />
@@ -211,9 +220,9 @@ const SpotifyWidget = () => {
                 </div>
                 <div className="flex-1 min-w-0">
                     <p className="text-white font-medium text-sm">neyo is listening to</p>
-                    <a 
-                        href={currentTrack.external_url} 
-                        target="_blank" 
+                    <a
+                        href={currentTrack.external_url}
+                        target="_blank"
                         rel="noopener noreferrer"
                         className="text-green-400 font-semibold text-sm truncate hover:text-green-300 transition-colors block"
                     >
@@ -222,18 +231,18 @@ const SpotifyWidget = () => {
                     <p className="text-gray-400 text-xs truncate">by {currentTrack.artist}</p>
                 </div>
             </div>
-            
+
             {/* Compact Progress Bar */}
             {currentTrack.duration_ms && (
                 <div className="space-y-1">
                     <div className="w-full bg-gray-700 rounded-full h-1">
-                        <div 
+                        <div
                             className="bg-green-500 h-1 rounded-full transition-all duration-1000 ease-linear"
                             style={{ width: `${progress}%` }}
                         />
                     </div>
                     <div className="flex justify-between text-xs text-gray-500">
-                        <span>{formatTime((currentTrack.progress_ms || 0) + (progress * currentTrack.duration_ms / 100))}</span>
+                        <span>{formatTime((progress / 100) * currentTrack.duration_ms)}</span>
                         <span>{formatTime(currentTrack.duration_ms)}</span>
                     </div>
                 </div>
