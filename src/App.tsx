@@ -433,11 +433,7 @@ const ProjectCard = ({ title, description, tech, links, status }: {
                         href={link.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className={`interactive group relative flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-300 text-sm font-medium overflow-hidden border ${
-                            link.type === 'github' 
-                                ? 'bg-gradient-to-r from-gray-800 to-gray-900 hover:from-gray-700 hover:to-gray-800 text-white border-gray-600 hover:border-gray-500 hover:shadow-lg hover:shadow-gray-500/20' 
-                                : 'bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-500 hover:to-emerald-500 text-white border-green-500 hover:border-green-400 hover:shadow-lg hover:shadow-green-500/20'
-                        } hover:-translate-y-1 hover:scale-105`}
+                        className="interactive group relative flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-300 text-sm font-medium overflow-hidden border bg-gradient-to-r from-gray-800 to-gray-900 hover:from-gray-700 hover:to-gray-800 text-white border-gray-600 hover:border-gray-500 hover:shadow-lg hover:shadow-gray-500/20 hover:-translate-y-1 hover:scale-105"
                     >
                         <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/10 to-white/0 -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
                         <ExternalLink className="w-4 h-4 relative z-10 group-hover:rotate-12 transition-transform duration-300" />
@@ -491,8 +487,8 @@ const StaffCard = ({ icon, title, description, links, isActive = true, warning }
                                         : link.type === 'primary'
                                             ? 'bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white border border-purple-500 hover:border-purple-400 hover:shadow-lg hover:shadow-purple-500/20 hover:-translate-y-1 hover:scale-105'
                                             : link.type === 'discord'
-                                            ? 'bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white border border-indigo-500 hover:border-indigo-400 hover:shadow-lg hover:shadow-indigo-500/20 hover:-translate-y-1 hover:scale-105'
-                                            : 'border-2 border-purple-500 text-purple-400 hover:bg-gradient-to-r hover:from-purple-600 hover:to-pink-600 hover:text-white hover:border-purple-400 hover:shadow-lg hover:shadow-purple-500/20 hover:-translate-y-1 hover:scale-105'
+                                                ? 'bg-gradient-to-r from-gray-800 to-gray-900 hover:from-gray-700 hover:to-gray-800 text-white border border-gray-600 hover:border-gray-500 hover:shadow-lg hover:shadow-gray-500/20 hover:-translate-y-1 hover:scale-105'
+                                                : 'border-2 border-purple-500 text-purple-400 hover:bg-gradient-to-r hover:from-purple-600 hover:to-pink-600 hover:text-white hover:border-purple-400 hover:shadow-lg hover:shadow-purple-500/20 hover:-translate-y-1 hover:scale-105'
                                     }`}
                                 onClick={link.type === 'warning' ? (e) => {
                                     e.preventDefault();
@@ -642,11 +638,11 @@ function App() {
                         <div className="flex justify-center">
                             <a
                                 href="#about"
-                                className="interactive group relative flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-purple-600 via-purple-700 to-pink-600 hover:from-purple-500 hover:via-purple-600 hover:to-pink-500 text-white rounded-2xl transition-all duration-500 hover:shadow-2xl hover:shadow-purple-500/40 hover:-translate-y-2 hover:scale-105 border border-purple-400/20 overflow-hidden"
+                                className="interactive group relative flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-gray-800 to-gray-900 hover:from-gray-700 hover:to-gray-800 text-white rounded-2xl transition-all duration-300 hover:shadow-lg hover:shadow-gray-500/20 hover:-translate-y-1 hover:scale-105 border border-gray-600 hover:border-gray-500 overflow-hidden"
                             >
-                                <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+                                <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/10 to-white/0 -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
                                 <span className="relative z-10 font-semibold">Learn More</span>
-                                <ChevronDown className="w-5 h-5 relative z-10 group-hover:animate-bounce" />
+                                <ChevronDown className="w-5 h-5 relative z-10 group-hover:rotate-12 transition-transform duration-300" />
                             </a>
                         </div>
                     </div>
@@ -779,7 +775,7 @@ function App() {
                                 description="[Add description of your role and the community]"
                                 links={[
                                     { type: "discord", url: "#", label: "Join Server" },
-                                    { type: "primary", url: "#", label: "Website" }
+                                    { type: "website", url: "#", label: "Website" }
                                 ]}
                             />
 
