@@ -487,11 +487,11 @@ function App() {
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-purple-900 via-gray-900 to-pink-900 text-white relative overflow-x-hidden">
-            {/* Subtle grid pattern overlay */}
-            <div className="fixed inset-0 opacity-5 pointer-events-none">
-                <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.1)_1px,transparent_1px)] bg-[size:50px_50px]" />
+            {/* Grid pattern overlay */}
+            <div className="fixed inset-0 opacity-15 pointer-events-none">
+                <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.15)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.15)_1px,transparent_1px)] bg-[size:50px_50px]" />
             </div>
-            
+
             {/* Dark overlay for better text readability */}
             <div className="fixed inset-0 bg-black/30 pointer-events-none" />
 
