@@ -607,7 +607,7 @@ function App() {
 
                         <div className="flex justify-center gap-6 mb-12">
                             {[
-                                { icon: <MessageSquare className="w-6 h-6" />, href: "#", label: "Discord" },
+                                { icon: <img src="https://clipartcraft.com/images/discord-logo-transparent-gray-3.png" alt="Discord" className="w-6 h-6" />, href: "#", label: "Discord" },
                                 { icon: <Github className="w-6 h-6" />, href: "#", label: "GitHub" },
                                 { icon: <Twitter className="w-6 h-6" />, href: "#", label: "Twitter" },
                                 { icon: <Mail className="w-6 h-6" />, href: "#", label: "Email" }
@@ -839,7 +839,7 @@ function App() {
 
                         <div className="flex justify-center gap-6 mb-6">
                             {[
-                                { icon: <MessageSquare className="w-5 h-5" />, href: "#", label: "Discord" },
+                                { icon: <img src="https://clipartcraft.com/images/discord-logo-transparent-gray-3.png" alt="Discord" className="w-5 h-5" />, href: "#", label: "Discord" },
                                 { icon: <Github className="w-5 h-5" />, href: "#", label: "GitHub" },
                                 { icon: <Twitter className="w-5 h-5" />, href: "#", label: "Twitter" },
                                 { icon: <Mail className="w-5 h-5" />, href: "#", label: "Email" }
