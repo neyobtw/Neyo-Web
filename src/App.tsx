@@ -97,7 +97,7 @@ const TypewriterText = ({ texts, speed = 100, deleteSpeed = 50, pauseTime = 2000
 
     useEffect(() => {
         const currentFullText = texts[currentTextIndex];
-        
+
         const timeout = setTimeout(() => {
             if (!isDeleting) {
                 // Typing
@@ -592,16 +592,18 @@ function App() {
                                 neyo
                             </h1>
                             <div className="mb-8">
-                                <TypewriterText 
-                                    texts={[
-                                        "Full Stack Developer",
-                                        "See no evil, Hear no evil, Speak no evil",
-                                        "You cannot change things by loving them harder"
-                                    ]}
-                                    speed={80}
-                                    deleteSpeed={40}
-                                    pauseTime={2500}
-                                />
+                                <div className="bg-gray-800/50 rounded-xl p-6 border border-dashed border-gray-600 max-w-2xl mx-auto">
+                                    <TypewriterText
+                                        texts={[
+                                            "Full Stack Developer",
+                                            "See no evil, Hear no evil, Speak no evil",
+                                            "You cannot change things by loving them harder"
+                                        ]}
+                                        speed={80}
+                                        deleteSpeed={40}
+                                        pauseTime={2500}
+                                    />
+                                </div>
                             </div>
                         </div>
 
