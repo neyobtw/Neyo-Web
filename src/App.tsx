@@ -83,6 +83,61 @@ const CursorFollower = () => {
     );
 };
 
+// Typewriter animation component
+const TypewriterText = ({ texts, speed = 100, deleteSpeed = 50, pauseTime = 2000 }: {
+    texts: string[];
+    speed?: number;
+    deleteSpeed?: number;
+    pauseTime?: number;
+}) => {
+    const [currentTextIndex, setCurrentTextIndex] = useState(0);
+    const [currentText, setCurrentText] = useState('');
+    const [isDeleting, setIsDeleting] = useState(false);
+    const [showCursor, setShowCursor] = useState(true);
+
+    useEffect(() => {
+        const currentFullText = texts[currentTextIndex];
+        
+        const timeout = setTimeout(() => {
+            if (!isDeleting) {
+                // Typing
+                if (currentText.length < currentFullText.length) {
+                    setCurrentText(currentFullText.slice(0, currentText.length + 1));
+                } else {
+                    // Finished typing, wait then start deleting
+                    setTimeout(() => setIsDeleting(true), pauseTime);
+                }
+            } else {
+                // Deleting
+                if (currentText.length > 0) {
+                    setCurrentText(currentText.slice(0, -1));
+                } else {
+                    // Finished deleting, move to next text
+                    setIsDeleting(false);
+                    setCurrentTextIndex((prev) => (prev + 1) % texts.length);
+                }
+            }
+        }, isDeleting ? deleteSpeed : speed);
+
+        return () => clearTimeout(timeout);
+    }, [currentText, isDeleting, currentTextIndex, texts, speed, deleteSpeed, pauseTime]);
+
+    // Cursor blinking effect
+    useEffect(() => {
+        const cursorInterval = setInterval(() => {
+            setShowCursor(prev => !prev);
+        }, 500);
+        return () => clearInterval(cursorInterval);
+    }, []);
+
+    return (
+        <span className="text-xl md:text-2xl text-gray-300">
+            {currentText}
+            <span className={`${showCursor ? 'opacity-100' : 'opacity-0'} transition-opacity`}>|</span>
+        </span>
+    );
+};
+
 // Enhanced Spotify Widget - Based on lukky's design
 const SpotifyWidget = () => {
     const [isPlaying, setIsPlaying] = useState(false);
@@ -536,11 +591,17 @@ function App() {
                             <h1 className="text-6xl md:text-8xl font-bold mb-6 bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 bg-clip-text text-transparent animate-pulse">
                                 neyo
                             </h1>
-                            <div className="text-xl md:text-2xl text-gray-300 mb-8">
-                                {/* PLACEHOLDER: Add your main title/role here */}
-                                <p className="bg-gray-800 rounded-lg p-4 border border-dashed border-gray-600">
-                                    [Your main title/role - edit this description]
-                                </p>
+                            <div className="mb-8">
+                                <TypewriterText 
+                                    texts={[
+                                        "Full Stack Developer",
+                                        "See no evil, Hear no evil, Speak no evil",
+                                        "You cannot change things by loving them harder"
+                                    ]}
+                                    speed={80}
+                                    deleteSpeed={40}
+                                    pauseTime={2500}
+                                />
                             </div>
                         </div>
 
