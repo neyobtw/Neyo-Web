@@ -87,6 +87,8 @@ async function getCurrentlyPlaying(accessToken) {
               album: track.album.name,
               image: track.album.images[0]?.url || null,
               external_url: track.external_urls.spotify,
+              progress_ms: response.progress_ms,
+              duration_ms: track.duration_ms,
             }
           });
         } catch (error) {
