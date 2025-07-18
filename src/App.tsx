@@ -149,7 +149,7 @@ const SpotifyWidget = () => {
             const elapsed = Date.now() - startTime;
             const currentProgressMs = initialProgress + elapsed;
             const newProgress = (currentProgressMs / currentTrack.duration_ms!) * 100;
-            
+
             if (newProgress >= 100) {
                 setProgress(100);
                 clearInterval(interval);
@@ -486,14 +486,14 @@ function App() {
     }, []);
 
     return (
-        <div className="min-h-screen bg-gray-950 text-white relative overflow-x-hidden">
-            {/* Full page gradient background */}
-            <div className="fixed inset-0 bg-gradient-to-br from-purple-900/20 via-gray-950 to-pink-900/20 pointer-events-none" />
-
-            {/* Grid Pattern */}
-            <div className="fixed inset-0 opacity-10 pointer-events-none">
+        <div className="min-h-screen bg-gradient-to-br from-purple-900 via-gray-900 to-pink-900 text-white relative overflow-x-hidden">
+            {/* Subtle grid pattern overlay */}
+            <div className="fixed inset-0 opacity-5 pointer-events-none">
                 <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.1)_1px,transparent_1px)] bg-[size:50px_50px]" />
             </div>
+            
+            {/* Dark overlay for better text readability */}
+            <div className="fixed inset-0 bg-black/30 pointer-events-none" />
 
             <CursorFollower />
             <ScrollToTop />
