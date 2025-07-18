@@ -120,7 +120,7 @@ const SpotifyWidget = () => {
             setIsOnline(true);
             setIsPlaying(data.isPlaying);
             setCurrentTrack(data.track);
-            
+
             if (data.track && data.track.progress_ms && data.track.duration_ms) {
                 setProgress((data.track.progress_ms / data.track.duration_ms) * 100);
             }
@@ -197,50 +197,42 @@ const SpotifyWidget = () => {
     }
 
     return (
-        <div className="fixed bottom-8 left-8 z-40 bg-gray-900/95 backdrop-blur-sm border border-green-500/50 rounded-2xl p-4 max-w-sm shadow-2xl hover:scale-105 transition-all duration-300">
-            {/* Header */}
-            <div className="flex items-center justify-between mb-3">
-                <span className="text-white font-medium">neyo is currently listening to:</span>
-                <div className="text-green-500">
-                    <Music className="w-5 h-5" />
+        <div className="fixed bottom-8 left-8 z-40 p-4 bg-gray-900/90 backdrop-blur-sm border border-green-500/50 rounded-2xl max-w-xs hover:scale-105 transition-transform duration-300">
+            <div className="flex items-center gap-3 mb-2">
+                <div className="relative">
+                    <img 
+                        src={currentTrack.image || '/api/placeholder/48/48'} 
+                        alt="Album Art"
+                        className="w-12 h-12 rounded-xl object-cover"
+                    />
+                    <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-500 rounded-full flex items-center justify-center">
+                        {isPlaying ? <Play className="w-2 h-2 text-white" /> : <Pause className="w-2 h-2 text-white" />}
+                    </div>
                 </div>
-            </div>
-
-            {/* Song Info */}
-            <div className="flex items-center gap-3 mb-3">
-                <img 
-                    src={currentTrack.image || '/api/placeholder/48/48'} 
-                    alt="Album Art"
-                    className="w-12 h-12 rounded-lg object-cover"
-                />
                 <div className="flex-1 min-w-0">
+                    <p className="text-white font-medium text-sm">neyo is listening to</p>
                     <a 
                         href={currentTrack.external_url} 
                         target="_blank" 
                         rel="noopener noreferrer"
-                        className="text-green-400 font-semibold text-sm hover:text-green-300 transition-colors block truncate"
+                        className="text-green-400 font-semibold text-sm truncate hover:text-green-300 transition-colors block"
                     >
                         {currentTrack.name}
                     </a>
-                    <div className="text-gray-400 text-xs truncate">
-                        By {currentTrack.artist}
-                    </div>
-                    <div className="text-gray-500 text-xs truncate">
-                        On {currentTrack.album}
-                    </div>
+                    <p className="text-gray-400 text-xs truncate">by {currentTrack.artist}</p>
                 </div>
             </div>
-
-            {/* Progress Bar */}
+            
+            {/* Compact Progress Bar */}
             {currentTrack.duration_ms && (
-                <div className="space-y-2">
+                <div className="space-y-1">
                     <div className="w-full bg-gray-700 rounded-full h-1">
                         <div 
                             className="bg-green-500 h-1 rounded-full transition-all duration-1000 ease-linear"
                             style={{ width: `${progress}%` }}
                         />
                     </div>
-                    <div className="flex justify-between text-xs text-gray-400">
+                    <div className="flex justify-between text-xs text-gray-500">
                         <span>{formatTime((currentTrack.progress_ms || 0) + (progress * currentTrack.duration_ms / 100))}</span>
                         <span>{formatTime(currentTrack.duration_ms)}</span>
                     </div>
